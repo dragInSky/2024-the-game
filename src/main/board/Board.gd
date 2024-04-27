@@ -5,22 +5,9 @@ signal combine_event_happend(final_value)
 
 var scene_element : PackedScene = preload("res://src/main/element/Element.tscn")
 
-@export var element_size : Vector2i = Vector2i(64, 64)
+var element_size : Vector2i = Vector2i(128, 128)
 
-@export var element_gap : Vector2i = Vector2i(12, 12):
-	set(_new_element_gap):
-		element_gap = _new_element_gap
-		arrange_elements()
-
-@export var margin_gap : Vector2i = Vector2i(20, 20):
-	set(_new_margin_gap):
-		margin_gap = _new_margin_gap
-		arrange_elements()
-
-@export var is_auto_scale_element : bool = true:
-	set(_new_is_auto_scale_element):
-		is_auto_scale_element = _new_is_auto_scale_element
-		arrange_elements()
+var element_gap : Vector2i = Vector2i(12, 12)
 
 var elements := {}
 
@@ -30,7 +17,6 @@ func _ready():
 	init_board()
 	elements[Vector2i(0, 3)].is_blank = false
 	elements[Vector2i(0, 3)].change_value(2)
-
 
 func check_game_over() -> bool:
 	var is_game_over := true
@@ -60,8 +46,6 @@ func get_elements_can_move(_move_direction : Vector2i) -> Array:
 	return result
 
 func handle_move(_move_direction : Vector2i):
-	await get_tree().process_frame
-	
 	var origin_map := {}
 	for e in elements.values():
 		if e.is_blank:
@@ -101,15 +85,12 @@ func handle_move(_move_direction : Vector2i):
 	
 	var move_map := {}
 	while true:
-		await get_tree().create_timer(0.01).timeout
 		var elements_can_move : Array = get_elements_can_move(_move_direction)
 		if elements_can_move.size() == 0:
 			break
 		for e in elements_can_move:
-			await get_tree().create_timer(0.01).timeout
 			var element : Element = e
 			var element_to : Element = elements.get(element.position_in_board + _move_direction)
-			#move_map[element] = element_to
 			if element_to.is_blank:
 				element_to.is_blank = false
 				element.is_blank = true
@@ -137,15 +118,7 @@ func init_board():
 
 func arrange_elements():
 	var global_rect : Rect2i = get_global_rect()
-	global_rect.position += margin_gap
-	global_rect.size -= margin_gap * 2
 	var global_center_pos : Vector2i = global_rect.position + global_rect.size / 2
-	
-	if is_auto_scale_element:
-		element_size.x = (min(global_rect.size.x, global_rect.size.y) - 3 * element_gap.x) / 4
-		element_size.y = (min(global_rect.size.x, global_rect.size.y) - 3 * element_gap.y) / 4
-		for e in elements.values():
-			e.element_size = element_size
 	
 	var elements_rect_size := Vector2i(
 		4 * element_size.x + 3 * element_gap.x, 
@@ -159,7 +132,6 @@ func arrange_elements():
 		for y in 4:
 			var element : Element = elements.get(Vector2i(x, y))
 			if !is_instance_valid(element):
-				print_debug("Error:arrange_elements")
 				return
 			element.position.x = (
 				elements_global_rect.position.x + 

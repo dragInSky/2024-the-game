@@ -2,17 +2,17 @@ extends Control
 class_name Element
 
 var ELEMENT_COLORS := {
-	2    : Color.from_hsv(0.55, 0.00, 1.00),
-	4    : Color.from_hsv(0.55, 0.10, 1.00),
-	8    : Color.from_hsv(0.55, 0.20, 1.00),
-	16   : Color.from_hsv(0.55, 0.30, 1.00),
-	32   : Color.from_hsv(0.55, 0.40, 1.00),
-	64   : Color.from_hsv(0.55, 0.50, 1.00),
-	128  : Color.from_hsv(0.55, 0.60, 1.00),
-	256  : Color.from_hsv(0.55, 0.70, 1.00),
-	512  : Color.from_hsv(0.55, 0.80, 1.00),
-	1024 : Color.from_hsv(0.55, 0.90, 1.00),
-	2048 : Color.from_hsv(0.55, 1.00, 1.00),
+	#2    : Color.from_hsv(0.55, 0.00, 1.00),
+	#4    : Color.from_hsv(0.55, 0.10, 1.00),
+	#8    : Color.from_hsv(0.55, 0.20, 1.00),
+	#16   : Color.from_hsv(0.55, 0.30, 1.00),
+	#32   : Color.from_hsv(0.55, 0.40, 1.00),
+	#64   : Color.from_hsv(0.55, 0.50, 1.00),
+	#128  : Color.from_hsv(0.55, 0.60, 1.00),
+	#256  : Color.from_hsv(0.55, 0.70, 1.00),
+	#512  : Color.from_hsv(0.55, 0.80, 1.00),
+	#1024 : Color.from_hsv(0.55, 0.90, 1.00),
+	#2048 : Color.from_hsv(0.55, 1.00, 1.00),
 }
 
 var position_in_board := Vector2i(0, 0)
@@ -43,11 +43,11 @@ func _process(_delta):
 
 func change_value(_new_value : float, _force_change := false):
 	value = _new_value
-	update_color()
+	#update_color()
 
-func update_color():
-	%ValueBackground.modulate = ELEMENT_COLORS.get(value)
+#func update_color():
+	#%ValueBackground.modulate = ELEMENT_COLORS.get(value)
 
 func generate(_new_value : float):
 	value = _new_value
-	update_color()
+	#update_color()
