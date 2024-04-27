@@ -30,12 +30,7 @@ func _ready():
 	init_board()
 	elements[Vector2i(0, 3)].is_blank = false
 	elements[Vector2i(0, 3)].change_value(2)
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
 
 func check_game_over() -> bool:
 	var is_game_over := true
@@ -124,89 +119,9 @@ func handle_move(_move_direction : Vector2i):
 					combine_events.append(element_to)
 	
 	for e in combine_events:
-		e.animate_zoom()
 		var value = e.value
 		e.value = origin_map[e]
 		e.change_value(value)
-	
-#	for e in origin_map:
-#		var element : Element = e
-#		var value : int = origin_map.get(e)
-#		if element.value != 0 and value != 0:
-#			if element.value != value:
-#				element.animate_zoom()
-	
-	#print("move_map: ", move_map)
-	
-#	for e in move_map:
-#		var element : Element = e
-#		var element_to : Element = move_map[e]
-		
-
-#func handle_move(_move_direction : Vector2i):
-#	var move_map := {}
-#	for x in 4:
-#		for y in 4:
-#			#print("x:%d, y:%d" % [x, y])
-#			var pos_in_board := Vector2i(x, y)
-#			var element : Element = elements.get(pos_in_board)
-#			if element.is_blank:
-#				continue
-#			var element_to : Element
-#			var flag_found := false
-#			var flag_neighbour := true
-#			var obstacles_count := 1
-#			pos_in_board += _move_direction
-#			while true:
-#				if !elements.has(pos_in_board):
-#					if is_instance_valid(element_to):
-#						if element != element_to:
-#							if !element.is_blank and !element_to.is_blank:
-#								if element.value == element_to.value:
-#									print("1")
-#									move_map[element] = element_to
-#							else:
-#								print("2")
-#								move_map[element] = element_to
-#					flag_found = true
-#					break
-#				element_to = elements.get(pos_in_board)
-#				if obstacles_count != 1 and !elements.has(pos_in_board + obstacles_count * _move_direction):
-#					if !element_to.is_blank:
-#						flag_found = true
-#					break
-#				if !element_to.is_blank:
-#					if flag_neighbour:
-#						if element != element_to:
-#							if element.value == element_to.value:
-#								print("3")
-#								move_map[element] = element_to
-#								flag_found = true
-#								break
-#							else:
-#								flag_neighbour = false
-#								obstacles_count += 1
-#								print("!!!")
-#				pos_in_board += _move_direction
-#			if flag_found:
-#				continue
-#			if !is_instance_valid(element_to):
-#				continue
-#			if element != element_to:
-#				print("4")
-#				move_map[element] = element_to
-#	print(move_map)
-#	for e in move_map:
-#		var element : Element = e
-#		var element_to : Element = move_map[e]
-#		if element_to.is_blank:
-#			element.is_blank = true
-#			element_to.is_blank = false
-#			element_to.change_value(element.value, true)
-#		else:
-#			element.is_blank = true
-#			element_to.change_value(element.value * 2)
-
 
 
 func init_board():
@@ -219,7 +134,6 @@ func init_board():
 			new_element.position_in_board = Vector2i(x, y)
 			elements[Vector2i(x, y)] = new_element
 	arrange_elements()
-	pass
 
 func arrange_elements():
 	var global_rect : Rect2i = get_global_rect()
@@ -260,9 +174,7 @@ func arrange_elements():
 				element_size.y / 2
 			)
 			element.element_position = element.position
-	pass
 
 
 func _on_resized():
 	arrange_elements()
-	pass # Replace with function body.

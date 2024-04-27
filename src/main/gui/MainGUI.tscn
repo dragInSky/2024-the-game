@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://j5q1v7i8qh5b"]
+
+[ext_resource type="Theme" uid="uid://bkcfr87v0i1wm" path="res://assets/theme/default_theme.tres" id="1_1jxrk"]
+[ext_resource type="PackedScene" uid="uid://cuv71i0daq75d" path="res://src/main/board/Board.tscn" id="2_ebxrc"]
+[ext_resource type="Script" path="res://src/main/gui/MainGUI.gd" id="2_kmyd3"]
+[ext_resource type="Script" path="res://src/main/gui/PopupFail.gd" id="3_ol42a"]
+
+[node name="MainGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1jxrk")
+script = ExtResource("2_kmyd3")
+
+[node name="PopupFail" type="PopupPanel" parent="."]
+size = Vector2i(308, 208)
+script = ExtResource("3_ol42a")
+
+[node name="MarginContainer" type="MarginContainer" parent="PopupFail"]
+custom_minimum_size = Vector2(300, 200)
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 304.0
+offset_bottom = 204.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="PopupFail/MarginContainer"]
+layout_mode = 2
+auto_translate = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer/HSplitContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Board" parent="MarginContainer/HSplitContainer/MarginContainer" instance=ExtResource("2_ebxrc")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="combine_event_happend" from="MarginContainer/HSplitContainer/MarginContainer/Board" to="." method="_on_board_combine_event_happend"]
