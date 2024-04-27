@@ -10,3 +10,4 @@ res://README.md
 res://src/main/gui/MainGUI.tscn
 res://src/main/gui/PopupFail.gd
 res://src/main/element/Element.tscn
+res://src/main/gui/MainGUI.gd

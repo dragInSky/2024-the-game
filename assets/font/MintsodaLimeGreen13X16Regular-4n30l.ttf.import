@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dokpydmr5w4t2"
-path="res://.godot/imported/HandWrite.ttf-18746bbaf70feb81de8c1f592e7b1293.fontdata"
+uid="uid://biij4nescr2fl"
+path="res://.godot/imported/MintsodaLimeGreen13X16Regular-4n30l.ttf-ab3f0ac6a20d956bb9bc69d9f5fa6755.fontdata"
 
 [deps]
 
-source_file="res://assets/font/HandWrite.ttf"
-dest_files=["res://.godot/imported/HandWrite.ttf-18746bbaf70feb81de8c1f592e7b1293.fontdata"]
+source_file="res://assets/font/MintsodaLimeGreen13X16Regular-4n30l.ttf"
+dest_files=["res://.godot/imported/MintsodaLimeGreen13X16Regular-4n30l.ttf-ab3f0ac6a20d956bb9bc69d9f5fa6755.fontdata"]
 
 [params]
 
@@ -27,11 +27,7 @@ Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[{
-"chars": [],
-"glyphs": [],
-"name": "New Configuration"
-}]
+preload=[]
 language_support={}
 script_support={}
 opentype_features={}

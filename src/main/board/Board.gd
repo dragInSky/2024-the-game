@@ -5,9 +5,7 @@ signal combine_event_happend(final_value)
 
 var scene_element : PackedScene = preload("res://src/main/element/Element.tscn")
 
-var element_size : Vector2i = Vector2i(128, 128)
-
-var element_gap : Vector2i = Vector2i(12, 12)
+var element_size : Vector2i = Vector2i(64, 64)
 
 var elements := {}
 
@@ -102,7 +100,7 @@ func handle_move(_move_direction : Vector2i):
 	for e in combine_events:
 		var value = e.value
 		e.value = origin_map[e]
-		e.change_value(value)
+		e.change_value_and_visibility(value)
 
 
 func init_board():
@@ -121,8 +119,8 @@ func arrange_elements():
 	var global_center_pos : Vector2i = global_rect.position + global_rect.size / 2
 	
 	var elements_rect_size := Vector2i(
-		4 * element_size.x + 3 * element_gap.x, 
-		4 * element_size.y + 3 * element_gap.y
+		4 * element_size.x, 
+		4 * element_size.y
 	)
 	var elements_global_rect := Rect2i(
 		global_center_pos - elements_rect_size / 2, 
@@ -136,17 +134,18 @@ func arrange_elements():
 			element.position.x = (
 				elements_global_rect.position.x + 
 				element_size.x * x + 
-				element_gap.x * (x - 1) + 
 				element_size.x / 2
 			)
 			element.position.y = (
 				elements_global_rect.position.y + 
 				element_size.y * y + 
-				element_gap.y * (y - 1) + 
 				element_size.y / 2
 			)
 			element.element_position = element.position
 
-
 func _on_resized():
 	arrange_elements()
+
+func _on_timer_timeout():
+	for e in elements.values():
+		e.make_invisible()
