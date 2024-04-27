@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://j5q1v7i8qh5b"]
+[gd_scene load_steps=8 format=3 uid="uid://j5q1v7i8qh5b"]
 
 [ext_resource type="Theme" uid="uid://bkcfr87v0i1wm" path="res://assets/theme/default_theme.tres" id="1_1jxrk"]
 [ext_resource type="PackedScene" uid="uid://cuv71i0daq75d" path="res://src/main/board/Board.tscn" id="2_ebxrc"]
 [ext_resource type="Script" path="res://src/main/gui/MainGUI.gd" id="2_kmyd3"]
 [ext_resource type="Script" path="res://src/main/gui/PopupFail.gd" id="3_ol42a"]
 [ext_resource type="FontFile" uid="uid://biij4nescr2fl" path="res://assets/font/MintsodaLimeGreen13X16Regular-4n30l.ttf" id="4_sptqa"]
+[ext_resource type="PackedScene" uid="uid://dd2awwnqmbpyt" path="res://light.tscn" id="6_m0t33"]
+[ext_resource type="AudioStream" uid="uid://bsph1bl4bq1ka" path="res://assets/gameSong.wav" id="7_uq2oc"]
 
 [node name="MainGUI" type="Control"]
 layout_mode = 3
@@ -40,7 +42,7 @@ vertical_alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="."]
 layout_mode = 0
-offset_right = 351.0
+offset_right = 640.0
 offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("4_sptqa")
 text = "score"
@@ -53,5 +55,32 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 632.0
 offset_bottom = 352.0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="lights" type="Node2D" parent="."]
+
+[node name="light" parent="lights" instance=ExtResource("6_m0t33")]
+
+[node name="light2" parent="lights" instance=ExtResource("6_m0t33")]
+position = Vector2(0, 360)
+
+[node name="light3" parent="lights" instance=ExtResource("6_m0t33")]
+position = Vector2(640, 360)
+
+[node name="light4" parent="lights" instance=ExtResource("6_m0t33")]
+position = Vector2(640, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_uq2oc")
+autoplay = true
 
 [connection signal="combine_event_happend" from="Board" to="." method="_on_board_combine_event_happend"]

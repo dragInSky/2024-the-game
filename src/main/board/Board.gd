@@ -16,6 +16,9 @@ func _ready():
 	elements[Vector2i(0, 3)].is_blank = false
 	elements[Vector2i(0, 3)].change_value(2)
 
+func _process(delta):
+	$TimeLeft.text = str(int($Timer.time_left))
+
 func check_game_over() -> bool:
 	var is_game_over := true
 	for e in elements.values():

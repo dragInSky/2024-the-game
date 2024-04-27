@@ -4,7 +4,7 @@ var score := 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	$ScoreLabel.text = str(score)
+	$ScoreLabel.text = "score: " + str(score)
 	var move_direction := Vector2i()
 	if Input.is_action_just_pressed("move_up"):
 		move_direction = Vector2i(0, -1)

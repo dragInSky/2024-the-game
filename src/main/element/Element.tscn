@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://byi3vee7ne5ry"]
+[gd_scene load_steps=8 format=3 uid="uid://byi3vee7ne5ry"]
 
 [ext_resource type="Theme" uid="uid://bkcfr87v0i1wm" path="res://assets/theme/default_theme.tres" id="1_ad4td"]
 [ext_resource type="Script" path="res://src/main/element/Element.gd" id="1_heyb8"]
 [ext_resource type="Texture2D" uid="uid://cbv2iupghypb5" path="res://assets/bgs.png" id="3_2uffm"]
 [ext_resource type="Texture2D" uid="uid://cnjw48glm0xux" path="res://assets/numbers.png" id="4_pn0wt"]
 [ext_resource type="Texture2D" uid="uid://y3hodx16dbv5" path="res://assets/bg.png" id="5_k0m36"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wv3so"]
+light_mode = 2
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1tqyg"]
+polygon = PackedVector2Array(32, 32, 32, -32, -32, -32, -32, 32, 32, 32)
 
 [node name="Element" type="Control"]
 layout_mode = 3
@@ -13,7 +19,12 @@ theme = ExtResource("1_ad4td")
 script = ExtResource("1_heyb8")
 
 [node name="Bg" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_wv3so")
 texture = ExtResource("5_k0m36")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Bg"]
+occluder = SubResource("OccluderPolygon2D_1tqyg")
+occluder_light_mask = 2
 
 [node name="bgsSprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_2uffm")
