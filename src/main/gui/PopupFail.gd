@@ -19,14 +19,12 @@ func _input(event):
 		if key_event.pressed:
 			if is_win == true:
 				Singleton.change_limit()
-				visible = false
-				get_tree().reload_current_scene()
+			get_tree().reload_current_scene()
 		
 	elif event is InputEventMouseButton:
 		var mouse_event = event as InputEventMouseButton
 		if mouse_event.pressed:
 			if is_win == true:
 				Singleton.change_limit()
-				visible = false
-				get_tree().reload_current_scene()
+			get_tree().reload_current_scene()
 

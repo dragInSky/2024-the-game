@@ -4,6 +4,14 @@ var score := 0
 
 var limit_score = Singleton.get_limit()
 
+func _ready():
+	if Singleton.field_size == 2:
+		$"VBoxContainer/HBoxContainer/2x2".modulate = Color(1.7, 1.7, 1.7)
+	if Singleton.field_size == 3:
+		$"VBoxContainer/HBoxContainer/3x3".modulate = Color(1.7, 1.7, 1.7)
+	if Singleton.field_size == 4:
+		$"VBoxContainer/HBoxContainer/4x4".modulate = Color(1.7, 1.7, 1.7)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	$VBoxContainer/ScoreLabel.text = "score: " + str(score) + "\nLimit score: " + str(limit_score)
