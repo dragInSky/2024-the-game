@@ -1,16 +1,49 @@
-[gd_scene load_steps=8 format=3 uid="uid://byi3vee7ne5ry"]
+[gd_scene load_steps=9 format=3 uid="uid://byi3vee7ne5ry"]
 
 [ext_resource type="Theme" uid="uid://bkcfr87v0i1wm" path="res://assets/theme/default_theme.tres" id="1_ad4td"]
 [ext_resource type="Script" path="res://src/main/element/Element.gd" id="1_heyb8"]
 [ext_resource type="Texture2D" uid="uid://cbv2iupghypb5" path="res://assets/bgs.png" id="3_2uffm"]
 [ext_resource type="Texture2D" uid="uid://cnjw48glm0xux" path="res://assets/numbers.png" id="4_pn0wt"]
-[ext_resource type="Texture2D" uid="uid://y3hodx16dbv5" path="res://assets/bg.png" id="5_k0m36"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wv3so"]
-light_mode = 2
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1tqyg"]
 polygon = PackedVector2Array(32, 32, 32, -32, -32, -32, -32, 32, 32, 32)
+
+[sub_resource type="Animation" id="Animation_qt2ns"]
+resource_name = "generate"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("numsSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ilick"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("numsSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(2, 2, 2, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_syuvp"]
+_data = {
+"RESET": SubResource("Animation_ilick"),
+"generate": SubResource("Animation_qt2ns")
+}
 
 [node name="Element" type="Control"]
 layout_mode = 3
@@ -18,18 +51,21 @@ anchors_preset = 0
 theme = ExtResource("1_ad4td")
 script = ExtResource("1_heyb8")
 
-[node name="Bg" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_wv3so")
-texture = ExtResource("5_k0m36")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Bg"]
-occluder = SubResource("OccluderPolygon2D_1tqyg")
-occluder_light_mask = 2
-
 [node name="bgsSprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_2uffm")
 hframes = 12
+frame = 1
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="bgsSprite"]
+occluder = SubResource("OccluderPolygon2D_1tqyg")
+occluder_light_mask = 2
 
 [node name="numsSprite" type="Sprite2D" parent="."]
+modulate = Color(2, 2, 2, 1)
 texture = ExtResource("4_pn0wt")
 hframes = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_syuvp")
+}

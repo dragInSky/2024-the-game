@@ -9,12 +9,16 @@ var element_size : Vector2i = Vector2i(64, 64)
 
 var elements := {}
 
+var time_left
+
+var columns = Singleton.field_size
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	init_board()
-	elements[Vector2i(0, 3)].is_blank = false
-	elements[Vector2i(0, 3)].change_value(2)
+	elements[Vector2i(0, columns - 1)].is_blank = false
+	elements[Vector2i(0, columns - 1)].change_value(2)
 
 func _process(delta):
 	$TimeLeft.text = str(int($Timer.time_left))
@@ -57,8 +61,8 @@ func handle_move(_move_direction : Vector2i):
 	var combine_events := []
 	
 	var pairs := {}
-	for x in 4:
-		for y in 4:
+	for x in columns:
+		for y in columns:
 			var pos_in_board := Vector2i(x, y)
 			var element : Element = elements.get(pos_in_board)
 			if element.is_blank:
@@ -83,6 +87,7 @@ func handle_move(_move_direction : Vector2i):
 		element.is_blank = true
 		element_to.is_blank = false
 		combine_events.append(element_to)
+		$MergeAudio.play()
 	
 	var move_map := {}
 	while true:
@@ -96,6 +101,7 @@ func handle_move(_move_direction : Vector2i):
 				element_to.is_blank = false
 				element.is_blank = true
 				element_to.change_value(element.value, true)
+				$MoveAudio.play()
 				if combine_events.has(element):
 					combine_events.erase(element)
 					combine_events.append(element_to)
@@ -107,8 +113,8 @@ func handle_move(_move_direction : Vector2i):
 
 
 func init_board():
-	for x in 4:
-		for y in 4:
+	for x in columns:
+		for y in columns:
 			var new_element : Element = scene_element.instantiate()
 			add_child(new_element)
 			new_element.is_blank = true
@@ -122,15 +128,15 @@ func arrange_elements():
 	var global_center_pos : Vector2i = global_rect.position + global_rect.size / 2
 	
 	var elements_rect_size := Vector2i(
-		4 * element_size.x, 
-		4 * element_size.y
+		columns * element_size.x, 
+		columns * element_size.y
 	)
 	var elements_global_rect := Rect2i(
 		global_center_pos - elements_rect_size / 2, 
 		elements_rect_size
 	)
-	for x in 4:
-		for y in 4:
+	for x in columns:
+		for y in columns:
 			var element : Element = elements.get(Vector2i(x, y))
 			if !is_instance_valid(element):
 				return

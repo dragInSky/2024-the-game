@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuv71i0daq75d"]
+[gd_scene load_steps=5 format=3 uid="uid://cuv71i0daq75d"]
 
 [ext_resource type="Script" path="res://src/main/board/Board.gd" id="1_5hmtf"]
 [ext_resource type="FontFile" uid="uid://biij4nescr2fl" path="res://assets/font/MintsodaLimeGreen13X16Regular-4n30l.ttf" id="2_6335x"]
+[ext_resource type="AudioStream" uid="uid://c5seispbk1imq" path="res://assets/menu_1.wav" id="3_jqwdq"]
+[ext_resource type="AudioStream" uid="uid://b51inbucunbgp" path="res://assets/menu_7.wav" id="4_x2ivq"]
 
 [node name="Board" type="Container"]
 script = ExtResource("1_5hmtf")
@@ -12,12 +14,15 @@ autostart = true
 
 [node name="TimeLeft" type="Label" parent="."]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.141176, 0.321569, 0.231373, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_6335x")
 text = "time"
-horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="MergeAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jqwdq")
+
+[node name="MoveAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_x2ivq")
+volume_db = 5.0
 
 [connection signal="resized" from="." to="." method="_on_resized"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,11 +1,14 @@
 AudioStreamPlayer2D
+Label
+HBoxContainer
+VBoxContainer
+Button
+AnimationPlayer
 Node2D
 WorldEnvironment
 ColorRect
 PointLight2D
 CanvasModulate
 LightOccluder2D
-Label
 Timer
 Sprite2D
-AnimatedSprite2D

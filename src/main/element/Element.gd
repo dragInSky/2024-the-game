@@ -21,6 +21,10 @@ var value : int = 2
 
 var element_size : Vector2i = Vector2i(64, 64)
 
+func _process(delta):
+	if $numsSprite.visible == false && is_blank == false:
+		$bgsSprite.set_frame(1)
+
 var is_blank := false:
 	set(_new_is_blank):
 		is_blank = _new_is_blank
@@ -46,14 +50,16 @@ func update_color():
 func refresh():
 	$numsSprite.set_frame(0)
 	$bgsSprite.set_frame(0)
+	$numsSprite.visible = true
 
 func generate(_new_value : float):
-	make_visible()
 	value = _new_value
 	update_color()
+	$AnimationPlayer.play("generate")
 
 func make_invisible():
-	$numsSprite.visible = false
+	if is_blank == false:
+		$numsSprite.visible = false
 
 func make_visible():
 	$numsSprite.visible = true
