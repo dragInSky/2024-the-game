@@ -21,7 +21,7 @@ func _ready():
 	elements[Vector2i(0, columns - 1)].change_value(2)
 
 func _process(delta):
-	$TimeLeft.text = str(int($Timer.time_left))
+	time_left = " to dementia: " + str(int($Timer.time_left))
 
 func check_game_over() -> bool:
 	var is_game_over := true
@@ -38,6 +38,7 @@ func random_new_element():
 			valid_elements.append(e)
 	var random_element : Element = valid_elements[randi() % valid_elements.size()]
 	random_element.is_blank = false
+	$MoveAudio.play()
 	random_element.generate(2 if randi() % 2 == 0 else 4)
 
 func get_elements_can_move(_move_direction : Vector2i) -> Array:
@@ -101,7 +102,6 @@ func handle_move(_move_direction : Vector2i):
 				element_to.is_blank = false
 				element.is_blank = true
 				element_to.change_value(element.value, true)
-				$MoveAudio.play()
 				if combine_events.has(element):
 					combine_events.erase(element)
 					combine_events.append(element_to)
@@ -158,3 +158,4 @@ func _on_resized():
 func _on_timer_timeout():
 	for e in elements.values():
 		e.make_invisible()
+

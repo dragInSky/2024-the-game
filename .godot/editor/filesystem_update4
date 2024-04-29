@@ -9,3 +9,7 @@ res://src/main/gui/PopupFail.gd
 res://src/main/gui/MainGUI.gd
 res://src/main/singleton.gd
 res://popup_fail.tscn
+res://Start.tscn
+res://Start.gd
+res://Window.gd
+res://src/main/gui/Popup.gd
