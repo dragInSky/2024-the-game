@@ -1,15 +1,1 @@
-res://src/main/board/Board.tscn
-res://assets/theme/default_theme.tres
-res://src/main/element/Element.tscn
-res://src/main/board/Board.gd
-res://src/main/element/Element.gd
-res://src/main/light.tscn
 res://src/main/gui/MainGUI.tscn
-res://src/main/gui/PopupFail.gd
-res://src/main/gui/MainGUI.gd
-res://src/main/singleton.gd
-res://popup_fail.tscn
-res://Start.tscn
-res://Start.gd
-res://Window.gd
-res://src/main/gui/Popup.gd

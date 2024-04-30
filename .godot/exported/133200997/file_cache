@@ -1,0 +1,5 @@
+res://src/main/board/Board.tscn::cc886ee670d7b1542b5348be11fc2dc8::1714405348::res://.godot/exported/133200997/export-aacb49efa1063b07d5e685251acb4c5a-Board.scn
+res://src/main/element/Element.tscn::e7c60f6fbb3eb975448dbac992e2bff4::1714403089::res://.godot/exported/133200997/export-6acd9c2707ee8bc06ba1c87845c684c2-Element.scn
+res://src/main/gui/MainGUI.tscn::1f118e88698385c48579a838e269c1a9::1714406759::res://.godot/exported/133200997/export-e7f151d572c8c811292ed72f061a650f-MainGUI.scn
+res://src/main/light.tscn::7dfe04599e9dd550ab6dc3d4434291bd::1714405335::res://.godot/exported/133200997/export-59a2e985a3f57ab16a11d15e6f0ea270-light.scn
+res://popup_fail.tscn::ee41663f75099d11b7d97e845e58040b::1714406161::res://.godot/exported/133200997/export-5dffebcac035de8bf879f4bcd6b84f9c-popup_fail.scn
